@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Details</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+
+h2 {
+    text-align: center;
+}
+
+form {
+    max-width: 400px;
+    margin: 0 auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+form input[type="text"],
+form input[type="date"],
+form input[type="email"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+form button[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    width: 100%;
+}
+        .btn {
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin-top: 10px;
+            text-align:right;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="edit-1"><a class="btn" href="{% url 'my_details' %}">Back</a></div>
+    <h2>Edit Profile</h2>
+    <form method="post">
+        {% csrf_token %}
+        {% for a in object %}
+        <label for="fname">First Name:</label><br>
+        <input type="text" id="fname" name="fname" value="{{ a.first_name }}" required><br>
+
+        <label for="lname">Last Name:</label><br>
+        <input type="text" id="lname" name="lname" value="{{ a.last_name }}" required><br>
+
+        <label for="dob">Date of Birth:</label><br>
+        <input type="date" id="dob" name="dob" value="{{ a.dob|date:'Y-m-d' }}" required><br>
+
+        <label for="gender">Gender:</label><br>
+        <input type="text" id="gender" name="gender" value="{{ a.gender }}" required><br>
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email" value="{{ a.email }}" required><br>
+
+        <label for="phnum">Contact:</label><br>
+        <input type="text" id="phnum" name="phnum" value="{{ a.contact_number }}" required><br>
+
+        <button type="submit">Save Changes</button>
+        {% endfor %}
+    </form>
+</body>
+</html>

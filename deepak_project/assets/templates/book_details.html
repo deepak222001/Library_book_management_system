@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book_Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        h1 {
+            margin-bottom: 30px;
+        }
+        .btn {
+            background-color: #f4f4f4;
+            color: black;
+            text-decoration: none;
+            border: 1px solid black;
+            margin-right:390px;
+            margin-top:10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Add Book</h1>
+    <form method="post" enctype="multipart/form-data">
+         {% csrf_token %}
+        <label for="bookname">Book Name</label>
+        <input type="text" id="bookname" name="bookname" ><br><br>
+        <label for="authorname">Author Name</label>
+        <input type="text" id="authorname" name="authorname" ><br><br>
+        <label for="filedata">Choose File</label>
+        <input type="file" id="filedata" name="filedata"><br><br>
+        <label for="status">Status</label>
+        <input type="text" id="status" name="status"><br><br>
+        <label for="createdate">Create Date</label>
+        <input type="date" id="createdate" name="createdate"><br><br>
+        <label for="updatedate">Update Date</label>
+        <input type="date" id="updatedate" name="updatedate"><br><br>
+        <button type="submit">Submit</button>
+    </form>
+    <a class="btn" href="{% url 'book_submit_admin' %}">Back</a>
+</body>
+</html>

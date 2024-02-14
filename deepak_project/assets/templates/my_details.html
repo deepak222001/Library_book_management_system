@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My_Details</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            text-align: left;
+        }
+        td{
+            border: 1px solid black;
+            padding: 20px;
+
+        }
+        .tab {
+            display:flex;
+            justify-content: center;
+        }
+        h2{
+            text-align: center;
+        }
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+        .btn {
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            margin-top: 10px;
+            text-align:right;
+        }
+        .edit{
+            padding-top:30px;
+            text-align:right;
+            display:flex;
+            justify-content: space-between;
+        }
+        .edit-1 {
+            order: 1;
+        }
+        .edit-2 {
+            order: 2;
+            padding-left:1350px;
+        }
+        .edit-3 {
+            order: 3;
+        }
+        .cp{
+            padding-top:160px;
+            text-align:right;
+            padding-right:30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="edit">
+        <div class="edit-1"><a class="btn" href="{% url 'book_submit' %}">Back</a></div>
+        <div class="edit-2"><a class="btn" href="{% url 'edit_details' %}">Edit</a></div>
+        <div class="edit-3"><a class="btn" href="{% url 'login' %}">Logout</a></div>
+    </div>
+    <h2>My Details</h2>
+    <div>
+        <table class="tab">
+            {% for a in object %}
+            <tr>
+                <td>First Name</td>
+                <td>{{a.first_name}}</td>
+            </tr>
+            <tr>
+                <td>Last Name</td>
+                <td>{{a.last_name}}</td>
+            </tr>
+            <tr>
+                <td>DOB</td>
+                <td>{{a.dob}}</td>
+            </tr>
+            <tr>
+                <td>Gender</td>
+                <td>{{a.gender}}</td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>{{a.email}}</td>
+            </tr>
+            <tr>
+                <td>Contact</td>
+                <td>{{a.contact_number}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="cp">
+        <a class="btn" href="{% url 'change_password' %}">Change Password</a>
+    </div>
+</body>
+</html>

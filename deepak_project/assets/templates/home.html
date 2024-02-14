@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border: 1px solid black;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+        }
+        .btn {
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .edit{
+            padding-left:90%
+        }
+    </style>
+</head>
+<body>
+    <div class="edit"><a class="btn" href="{% url 'login' %}">Logout</a></div>
+    <h1>User Details</h1>
+    <div class="container">
+        <table>
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>DOB</th>
+                <th>Gender</th>
+                <th>Email</th>
+                <th>Contact</th>
+            </tr>
+            {% for a in object %}
+            <tr>
+                <td>{{a.first_name}}</td>
+                <td>{{a.last_name}}</td>
+                <td>{{a.dob}}</td>
+                <td>{{a.gender}}</td>
+                <td>{{a.email}}</td>
+                <td>{{a.contact_number}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+        <a class="btn" href="{% url 'book_submit_admin' %}">Book Details</a>
+    </div>
+</body>
+</html>

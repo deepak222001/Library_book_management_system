@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Submit Admin</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            text-align: center;
+        }
+         body {
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .btn-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        .btn-2 {
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            display: inline-block;
+            margin-top: 10px;
+            margin-left: 50px;
+        }
+        .btn-1 {
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            display: inline-block;
+            margin-top: 10px;
+            margin-right: 50px;
+        }
+        .del-btn {
+            background-color: red;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            display: inline-block;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Book Details</h1>
+    <table>
+        <tr>
+            <th>Book Name</th>
+            <th>Author Name</th>
+            <th>Book Image</th>
+            <th>Remove Book</th>
+        </tr>
+        {% for a in object %}
+        <tr>
+            <td>{{ a.Book_Name }}</td>
+            <td>{{ a.Author_Name }}</td>
+            <td>
+                <img src="{{a.File_Data.url}}" style="height:100px;width:100px" alt="book_img">
+            </td>
+            <td><a class="del-btn" href="{% url 'delete_book' a.id %}">Delete</a></td>
+        {% endfor %}
+        </tr>
+    </table>
+    <div class="btn-container">
+        <a class="btn-1" href="{% url 'book_details' %}">Add Book</a>
+        <a class="btn-2" href="{% url 'home' %}">User Details</a>
+    </div>
+</body>
+</html>
+
+

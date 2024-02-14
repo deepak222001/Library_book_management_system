@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Register Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: auto;
+        }
+
+        .registration {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 550px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        h4 {
+            color: #555;
+            text-align: center;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 8px;
+        }
+
+        input {
+            padding: 8px;
+            margin-bottom: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .radio-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .radio-group label {
+            margin-right: 16px;
+        }
+
+        button {
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .errormsg {
+            color: red;
+            margin-top: 8px;
+        }
+        .fname{
+            margin-top: 15px;
+        }
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+        body{
+            font-family:sans-serif;
+            }
+    </style>
+</head>
+
+<body>
+    <div class="registration">
+        <h1>Welcome to Register Page</h1>
+        <h4>Fill in the following details</h4>
+        <hr>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="fname">
+                <label for="fname">First Name</label><br><br>
+                <input type="text" id="fname" name="fname" required>
+                <p class="errormsg" id="errormsgfn"></p>
+            </div>
+
+            <div class="lname">
+                <label for="lname">Last Name</label><br><br>
+                <input type="text" id="lname" name="lname" required>
+                <p class="errormsg" id="errormsgln"></p>
+            </div>
+
+            <div class="dob">
+                <label for="dob">DOB</label><br><br>
+                <input type="date" id="dob" name="dob" required>
+                <p class="errormsg" id="errormsgdb"></p>
+            </div><br>
+
+            <div class="gender">
+                <label>Gender</label><br><br>
+                <input type="radio" name="gender" id="male" value="Male">
+                <label for="male">Male</label>
+                <input type="radio" name="gender" id="female" value="Female">
+                <label for="female">Female</l abel>
+                <input type="radio" name="gender" id="others" value="Others">
+                <label for="others">Others</label>
+                <p class="errormsg" id="errormsggen"></p>
+            </div><br>
+
+            <div class="email">
+                <label for="email">Email</label><br><br>
+                <input type="email" id="email" name="email" required>
+                <p class="errormsg" id="errormsgmail"></p>
+            </div>
+
+            <div class="phnum">
+                <label for="phnum">Contact Number</label><br><br>
+                <input type="tel" id="phnum" name="phnum" required>
+                <p class="errormsg" id="errormsgph"></p>
+            </div>
+
+            <div class="password">
+                <label for="password">Password</label><br><br>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <div class="cpassword">
+                <label for="cpassword">Confirm Password</label><br><br>
+                <input type="password" id="cpassword" name="cpassword" required>
+                <p class="errormsg" id="errormsg"></p>
+            </div>
+
+            <div>
+                <button type="submit" id="submit" class="submit">Submit</button>
+            </div>
+            <p>Already have an account &nbsp&nbsp<a href="{% url 'login' %}">Login</a></p>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById("registerform").addEventListener("submit", function (event) {
+            if (PasswordValidation() && FormValidation()) {
+                return true;
+            }
+        event.preventDefault();
+        });
+        function PasswordValidation() {
+            var pwd = document.getElementById("password").value;
+            var cpwd = document.getElementById("cpassword").value;
+            var errormessage = document.getElementById("errormsg");
+
+            if (pwd !== cpwd) {
+                errormessage.textContent = "Password does not match";
+                return false;
+            }
+            if (pwd === "" || cpwd === "") {
+                errormessage.textContent = "Please fill in the password";
+                return false;
+            }
+        return true;
+        }
+
+        function FormValidation() {
+            var fn = document.getElementById("fname").value;
+            var ln = document.getElementById("lname").value;
+            var db = document.getElementById("dob").value;
+            var gen = document.querySelector('input[name="gender"]:checked');
+            var mail = document.getElementById("email").value;
+            var ph = document.getElementById("phnum").value;
+            var errormessagefn = document.getElementById("errormsgfn");
+            var errormessageln = document.getElementById("errormsgln");
+            var errormessagedb = document.getElementById("errormsgdb");
+            var errormessagegen = document.getElementById("errormsggen");
+            var errormessagemail = document.getElementById("errormsgmail");
+            var errormessageph = document.getElementById("errormsgph");
+
+            errormessagefn.textContent = "";
+            errormessageln.textContent = "";
+            errormessagedb.textContent = "";
+            errormessagegen.textContent = "";
+            errormessagemail.textContent = "";
+            errormessageph.textContent = "";
+
+            if (fn.trim() === '') {
+                errormessagefn.textContent = "Please enter the Firstname";
+                return false;
+            }
+
+            if (ln.trim() === '') {
+                errormessageln.textContent = "Please enter the Lastname";
+                return false;
+            }
+
+            if (db === '') {
+                errormessagedb.textContent = "Please enter the DOB";
+                return false;
+            }
+
+            if (!gen) {
+                errormessagegen.textContent = "Please select the gender";
+                return false;
+            }
+
+            if (mail.trim() === '') {
+                errormessagemail.textContent = "Please enter the Email";
+                return false;
+            }
+
+            if (ph.trim() === '') {
+                errormessageph.textContent = "Please enter the Contact Number";
+                return false;
+            }
+        return true;
+        }
+    </script>
+</body>
+
+</html>
