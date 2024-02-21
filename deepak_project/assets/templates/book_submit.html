@@ -33,6 +33,16 @@
             text-align:right;
             padding-right:30px;
         }
+        .sts{
+            background-color: green;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            display: inline-block;
+            margin-top: 10px;
+            width:auto;
+        }
     </style>
 </head>
 <body>
@@ -48,6 +58,7 @@
             <th>Book Name</th>
             <th>Author Name</th>
             <th>Book Image</th>
+            <th>Status</th>
         </tr>
         {% for a in object %}
         <tr>
@@ -56,6 +67,7 @@
             <td>
                 <img src="{{a.File_Data.url}}" style="height:75px;width:75px;" alt="book_img">
             </td>
+            <td class="sts">{{a.Status}}</td>
             {% endfor %}
         </tr>
     </table>
